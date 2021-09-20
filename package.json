@@ -1,6 +1,6 @@
 {
     "name": "eleventy-plugin-l10n",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Localisation plugin for eleventy",
     "main": "index.js",
     "files": [
