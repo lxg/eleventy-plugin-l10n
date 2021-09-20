@@ -1,0 +1,25 @@
+{
+    "name": "eleventy-plugin-l10n",
+    "version": "0.1.0",
+    "description": "Localisation plugin for eleventy",
+    "main": "index.js",
+    "files": [
+        "index.js"
+    ],
+    "keywords": [
+        "eleventy",
+        "l10n",
+        "localization",
+        "translation",
+        "gettext"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lxg/eleventy-plugin-l10n.git"
+    },
+    "author": "Alexander Günsche",
+    "license": "ISC",
+    "dependencies": {
+        "@lxg/l10n": "^2.2.3"
+    }
+}
