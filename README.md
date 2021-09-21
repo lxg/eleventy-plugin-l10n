@@ -97,4 +97,4 @@ To create/regenerate the `.po` files, run `npx l10n -ec` from the command line i
 
 ## Translating in JavaScript
 
-Let’s assume you also want to translate something in JavaScript, for example in the data source file. This can be done with the underlying @lxg/l10n library. For example:
+Let’s assume you also want to translate something in JavaScript, for example in the data source file. This can be done with the underlying @lxg/l10n library. See its documentation for details.
