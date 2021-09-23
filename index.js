@@ -31,8 +31,8 @@ module.exports = {
                 ? l10nHtml(content, translations, lang)
                 : content
         })
-    }
 
-    options.watch &&
-        eleventyConfig.addWatchTarget(`${options.watchDir}/**/*.po`)
+        options.watch &&
+            eleventyConfig.addWatchTarget(`${options.watchDir}/**/*.po`)
+    }
 }
