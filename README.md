@@ -31,10 +31,13 @@ const pluginL10n = require("eleventy-plugin-l10n")
 module.exports = function(eleventyConfig) {
     // … other stuff …
 
+    // Register the plugin. You must set a `langCallback` for translations actually to work.
+    // Otherwise the plugin doesn’t know which language should be used want.
+    // The parameters passed to the callback are the template context object, the path string and the content string.
+
+    // The following example assumes that the locale value is set in the page template
     eleventyConfig.addPlugin(pluginL10n, {
-        // langCallback tells the plugin how to determine the language from the path of a given file.
-        // In this case, it is the first path segment.
-        langCallback : path => path.split("/")[1]
+        langCallback : context => context.frontMatter.data.locale
     })
 }
 ```
@@ -84,6 +87,14 @@ permalink: "{{ locale }}/hello-world"
 <h1>
     <l10n:t>Hello World!</l10n:t>
 </h1>
+```
+
+In this case, the `langCallback` should be something like:
+
+```js
+    eleventyConfig.addPlugin(pluginL10n, {
+        langCallback : (ctxt, path) => path.split("/")[1]
+    })
 ```
 
 This will create all localised pages automatically from one source file.

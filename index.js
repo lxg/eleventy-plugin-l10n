@@ -24,10 +24,10 @@ module.exports = {
             translations = await l10nLib.compileTranslations(catalogs)
         })
 
-        eleventyConfig.addTransform("l10n-translate", (content, path) => {
-            const lang = options.langCallback(path)
+        eleventyConfig.addTransform("l10n-translate", function(content, path) {
+            const lang = options.langCallback(this, path, content) || "en"
 
-            return (path.endsWith(".html"))
+            return this.templateData.config.templateFormats.some(ext => path.endsWith(`.${ext}`))
                 ? l10nHtml(content, translations, lang)
                 : content
         })
