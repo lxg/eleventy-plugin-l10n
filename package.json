@@ -20,6 +20,7 @@
     "author": "Alexander Günsche",
     "license": "ISC",
     "dependencies": {
-        "@lxg/l10n": "^2.3.0"
+        "@lxg/l10n": "^2.4.0",
+        "deepmerge": "^4.2.2"
     }
 }

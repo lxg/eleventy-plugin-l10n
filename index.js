@@ -1,11 +1,21 @@
+const deepmerge = require("deepmerge")
+const fs = require('fs')
 const l10nHtml = require("@lxg/l10n/html")
 
 module.exports = {
     initArguments: {},
     configFunction: (eleventyConfig, options = {}) => {
         options = Object.assign({
+            // a callback that determines the language of a particular page
             langCallback : () => "en",
+
+            // pass extra translation.json files
+            extra : [],
+
+            // do watch for changes in translations
             watch : true,
+
+            // directory to watch; default directory of @lxg/l10n
             watchDir : "l10n"
         }, options)
 
@@ -22,6 +32,13 @@ module.exports = {
             config = l10nLib.getConfig()
             const catalogs = l10nLib.getCatalogs(config.directory, config.locales)
             translations = await l10nLib.compileTranslations(catalogs)
+
+            if (options.extra.length) {
+                options.extra.forEach(file => {
+                    const trans = JSON.parse(fs.readFileSync(file).toString())
+                    translations = deepmerge(translations, trans)
+                })
+            }
         })
 
         eleventyConfig.addTransform("l10n-translate", function(content, path) {
