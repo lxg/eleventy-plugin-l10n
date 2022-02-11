@@ -16,7 +16,10 @@ module.exports = {
             watch : true,
 
             // directory to watch; default directory of @lxg/l10n
-            watchDir : "l10n"
+            watchDir : "l10n",
+
+            // template formats that should be parsed by the plugin
+            templateFormats: undefined
         }, options)
 
         // We have a bit of async stuff here. First, because we need to import an ES module
@@ -42,11 +45,15 @@ module.exports = {
         })
 
         eleventyConfig.addTransform("l10n-translate", function(content, path) {
-            const lang = options.langCallback(this, path, content) || "en"
+            const templateFormats = options.templateFormats || eleventyConfig.templateFormats || this.templateData.config.templateFormats
+            const isHtmlTemplate = templateFormats.some((ext) => path.endsWith(`.${ext}`))
 
-            return this.templateData.config.templateFormats.some(ext => path.endsWith(`.${ext}`))
-                ? l10nHtml(content, translations, lang)
-                : content
+            if (!isHtmlTemplate) {
+                return content
+            }
+
+            const lang = options.langCallback(this, path, content) || "en"
+            return l10nHtml(content, translations, lang)
         })
 
         options.watch &&
