@@ -42,8 +42,12 @@ module.exports = {
         })
 
         eleventyConfig.addTransform("l10n-translate", function(content, path) {
-            const lang = options.langCallback(this, path, content) || "en"
-            return l10nHtml(content, translations, lang)
+            if (typeof content === "string") {
+                const lang = options.langCallback(this, path, content) || "en"
+                return l10nHtml(content, translations, lang)
+            } else {
+                return content
+            }
         })
 
         options.watch &&
