@@ -29,7 +29,7 @@ module.exports = {
 
         eleventyConfig.on('beforeBuild', async () => {
             const l10nLib = await import("@lxg/l10n/lib")
-            config = l10nLib.getConfig()
+            const config = l10nLib.getConfig()
             const catalogs = l10nLib.getCatalogs(config.directory, config.locales)
             translations = await l10nLib.compileTranslations(catalogs)
 
